@@ -52,9 +52,19 @@ inputs:
     default: ''
     type: Dict
 outputs:
+  - name: query_job
+    description: 'Job'
+    type: String
   - name: output_gcs_path
     description: 'The path to the Cloud Storage bucket containing the query output in CSV format.'
     type: GCSPath
+  - name: query_dataset_id
+    description: 'Dataset ID'
+    type: String
+  - name: query_table_id
+    description: 'Table ID'
+    type: String
+
 implementation:
   container:
     image: gcr.io/ml-pipeline/ml-pipeline-gcp:bae654dc5cf407359ac5f822d03833768739c4c1
@@ -71,4 +81,7 @@ implementation:
     env:
       KFP_POD_NAME: "{{pod.name}}"
     fileOutputs:
+      query_job: /tmp/kfp/output/bigquery/query-job.json
       output_gcs_path: /tmp/kfp/output/bigquery/query-output-path.txt
+      query_dataset_id: /tmp/kfp/output/bigquery/query-dataset-id.txt
+      query_table_id: /tmp/kfp/output/bigquery/query-table-id.txt
