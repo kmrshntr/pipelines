@@ -70,5 +70,7 @@ implementation:
     ]
     env:
       KFP_POD_NAME: "{{pod.name}}"
+      PYTHONIOENCODING: utf-8
+      LANG: C.UTF-8
     fileOutputs:
       output_gcs_path: /tmp/kfp/output/bigquery/query-output-path.txt
